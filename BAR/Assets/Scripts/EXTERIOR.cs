@@ -2,20 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EXTERIOR : MonoBehaviour
+public class Exterior : MonoBehaviour
 {
-    public bool Colision;
-    void Awake()
+    // Start is called before the first frame update
+    void OnTrigger2D(Collider2D other)
     {
-        GetComponent<SpriteRenderer>().enabled = false;
-    }
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "PlayerIndoor" || other.tag == "PlayerLock")
+        if (other.tag == "PlayerIndoor")
         {
-            Colision = true;
-            other.gameObject.tag = "Player";
+            other.tag = "Player";
         }
     }
 }

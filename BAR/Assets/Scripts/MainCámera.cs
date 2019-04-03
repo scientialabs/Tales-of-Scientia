@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Detector : MonoBehaviour
+public class MainCámera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Transform Target;
+   void Awake()
     {
-        
-    }
+        Target = GameObject.FindGameObjectsWithTag("Player").Transform;
 
+    }
     // Update is called once per frame
     void Update()
     {
