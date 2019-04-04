@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class MainCámera : MonoBehaviour
 {
-    Transform Target;
+    Transform Objetivo;
+    
+    float tLX, tLY, bRX, bRY;
    void Awake()
     {
-        Target = GameObject.FindGameObjectsWithTag("Player").Transform;
+        Objetivo = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
-    // Update is called once per frame
+    
     void Update()
     {
         
+          transform.position = new Vector3(
+          Mathf.Clamp(Objetivo.transform.position.x,tLX, bRX),
+          Mathf.Clamp(Objetivo.transform.position.y, bRY, tLY),
+          transform.position.z
+          );
+        
     }
+
+    public void SetBound(GameObject Map)
+    {
+        Tiled2Unity.TiledMap config = Map.GetComponent<Tiled2Unity.TiledMap>();
+        float CameraSize = Camera.main.orthographicSize;
+
+        tLX = Map.transform.position.x + CameraSize;
+        tLY = Map.transform.position.y - CameraSize;
+        bRX = Map.transform.position.x + config.NumTilesWide - CameraSize;
+        bRY = Map.transform.position.y - config.NumTilesHigh + CameraSize;
+    }
+
 }

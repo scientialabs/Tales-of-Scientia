@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PlayerMovemente : MonoBehaviour
 {
@@ -8,11 +9,17 @@ public class PlayerMovemente : MonoBehaviour
     Animator Animador;
     Rigidbody2D RB2D;
     Vector2 Movimiento;
+    public GameObject MapaInicial;
+    void Awake()
+    {
+        Assert.IsNotNull(MapaInicial);
+    }
     // Start is called before the first frame update
     void Start()
     {
         Animador = GetComponent<Animator>();
         RB2D = GetComponent<Rigidbody2D>();
+        Camera.main.GetComponent<MainCámera>().SetBound(MapaInicial);
        
     }
 
